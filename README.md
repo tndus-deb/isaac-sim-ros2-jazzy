@@ -78,7 +78,6 @@ dongseon   : ROS_DOMAIN_ID=12
 ```
 
 Jetson Thor와 연동할 컨테이너는 컨테이너 실행 시 Jetson Thor와 동일한 Domain ID 사용
----
 
 ## 4. 기본 컨테이너 실행
 
