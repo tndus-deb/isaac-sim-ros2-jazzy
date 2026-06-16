@@ -29,7 +29,7 @@ README.md       : 빌드 및 실행 방법 정리
 저장소 clone 및 이미지 build
 
 ```bash
-git clone https://github.com/깃허브아이디/isaac-sim-ros2-jazzy.git
+git clone https://github.com/tndus-deb/isaac-sim-ros2-jazzy.git
 cd isaac-sim-ros2-jazzy
 docker build -t isaac-sim-ros2-jazzy:5.1.0 .
 docker images | grep isaac-sim-ros2-jazzy
@@ -45,13 +45,19 @@ isaac-sim-ros2-jazzy   5.1.0
 
 ## 3. ROS_DOMAIN_ID 설정
 
-ROS2 통신 범위 구분을 위한 `ROS_DOMAIN_ID` 설정 필요
+ROS2 topic 통신을 위해 Jetson Thor와 Isaac Sim 컨테이너의 `ROS_DOMAIN_ID`를 동일하게 설정
 
-Jetson Thor와 Isaac Sim 컨테이너 간 ROS2 topic 통신 시 동일한 `ROS_DOMAIN_ID` 사용 필요
+Isaac Sim 컨테이너 실행 시 `docker run` 명령어에 설정
+
+```bash
+-e ROS_DOMAIN_ID=10
+```
+
+동일한 Domain ID 사용 시 ROS2 topic 통신 가능
 
 ```text
 Jetson Thor ROS_DOMAIN_ID=10
-Isaac Sim 컨테이너 ROS_DOMAIN_ID=10
+Isaac Sim 컨테이너 실행 시 ROS_DOMAIN_ID=10
 → ROS2 topic 통신 가능
 ```
 
@@ -59,7 +65,7 @@ Domain ID 불일치 시 통신 분리
 
 ```text
 Jetson Thor ROS_DOMAIN_ID=10
-Isaac Sim 컨테이너 ROS_DOMAIN_ID=11
+Isaac Sim 컨테이너 실행 시 ROS_DOMAIN_ID=11
 → ROS2 topic 통신 불가 또는 분리
 ```
 
@@ -71,8 +77,7 @@ seonhyeong : ROS_DOMAIN_ID=11
 dongseon   : ROS_DOMAIN_ID=12
 ```
 
-Jetson Thor 연동 컨테이너의 경우 Jetson Thor와 동일한 Domain ID 설정
-
+Jetson Thor와 연동할 컨테이너는 컨테이너 실행 시 Jetson Thor와 동일한 Domain ID 사용
 ---
 
 ## 4. 기본 컨테이너 실행
