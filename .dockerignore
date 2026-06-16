@@ -1,0 +1,8 @@
+.git
+.gitignore
+*.log
+.cache
+build
+install
+log
+__pycache__
